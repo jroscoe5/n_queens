@@ -1,23 +1,25 @@
 /*
-@file	 - Board.h
-@author	 - Jonathon Roscoe | Seattle University | CS4600 Fall 2018
-@summary - Represents an N x N chess board 
+@file	- Board.h
+@author	- Jonathon Roscoe | Seattle University | CS4600 Fall 2018
+@summary- Represents an N x N chess board 
 */
+
 #include <string>
 using namespace std;
+
 #ifndef BOARD_H
 #define BOARD_H
 /*	
 Class that simulates an N x N chess board. Spaces with queens are true,
-empty spaces are false. Provides a method to print board state to a stream.
+empty spaces are false. Provides a method to print board state to a stream
 */
 class Board
 {
 public:
 	/*
-	@param squareSize - the desired X and Y dimensions of the board.
-		SIZE is initialized to DEFAULT_SIZE if less than 1.
-	All squares are initially empty.
+	@param squareSize - the desired X and Y dimensions of the board
+		SIZE is initialized to DEFAULT_SIZE if less than 1
+	All squares are initially empty
 	*/
 	Board(int squareSize) : SIZE((squareSize > 0) ? squareSize : DEFAULT_SIZE)
 	{
@@ -73,7 +75,7 @@ public:
 	}
 
 	/*
-	Provides write access to the interior board.
+	Provides write access to the interior board
 	@param x - the x cordinate of the board
 	@param y - the y cordinate of the board
 	@param value - will be written to board at provided cordinates
@@ -85,12 +87,12 @@ public:
 
 	/*
 	Writes a graphical representation of the board state to a stream
-	@param out - ostream object to write board to.
+	@param out - ostream object to write board to
 	*/
 	void PrintBoard(ostream& out)
 	{
 		static const string QUEEN = "Q";
-		static const string EMPTY = "_";
+		static const string EMPTY = "-";
 
 		// Top of board: A dashed line
 		for (int i = 0; i < SIZE * 4 + 1; i++)
@@ -111,8 +113,11 @@ public:
 	}
 
 private:
-	static const int DEFAULT_SIZE = 1;
-	const int SIZE; // board has dimensions [SIZE] x [SIZE]
+	/* Default size of a board */
+	static const int DEFAULT_SIZE = 1; 
+	/* Board has dimensions [SIZE] x [SIZE] */
+	const int SIZE;
+	/* Internal 2d boolean array represents the board */
 	bool** board;
 };
 #endif
