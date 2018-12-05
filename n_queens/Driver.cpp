@@ -5,10 +5,14 @@ using namespace std;
 
 int main(int argc, char* argv)
 {
-	vector<bool**> solutions;
-	IQueenGen test(9);
-	test.GenerateSolutions(solutions);
-	test.PrintBoard(solutions[0]);
+	vector<Board*> solutions;
+	IQueenGen test(15);
+	double time;
+	cout << test.TimedGenerateSolutons(time);
+
+	test.PrintSolutions(cout);
+	test.PrintSolutions(cout);
+	test.PrintSolutions(cout);
 
 	cout << "Hello World!" << endl;
 	cin.get();
