@@ -1,28 +1,40 @@
-/*
-@file	- SerialQueenGen.cpp
-@author	- Jonathon Roscoe | Seattle University | CS4600 Fall 2018
-@summary- Function definitions of SerialQueenGen.h
-*/
+#include "ParallelQueenGenV1.h"
 
-#include "SerialQueenGen.h"
-
-SerialQueenGen::SerialQueenGen(int numberOfQueens = DEFAULT_NUM) : 
-	IQueenGen(numberOfQueens) {}
-
-unsigned int SerialQueenGen::GenerateSolutions()
+ParallelQueenGenV1::ParallelQueenGenV1(int numberOfQueens = DEFAULT_NUM) :
+	IQueenGen(numberOfQueens)
 {
-	clearSolutionList();
-	Board board(N);
-	recursiveGenerate(board, 0);
-	return (unsigned int) solutions.size();
 }
 
-void SerialQueenGen::recursiveGenerate(Board board, int row)
+unsigned int ParallelQueenGenV1::GenerateSolutions()
+{
+	clearSolutionList();
+	future<void>* handles = new future<void>[N];
+	Board board(N);
+	for (int col = 0; col < N; col++)
+	{
+		board(0, col, true);
+		handles[col] = async(launch::async, &ParallelQueenGenV1::recursiveGenerate, this, board, 1);
+		board(0, col, false);
+	}
+
+	for (int i = 0; i < N; i++)
+	{
+		handles[i].wait();
+	}
+
+	delete[] handles;
+	return solutions.size();
+}
+
+
+void ParallelQueenGenV1::recursiveGenerate(Board board, int row)
 {
 	// If current row is equal to size, board has been filled
 	if (row == N)
 	{
+		solutionLock.lock();
 		solutions.push_back(new Board(board));
+		solutionLock.unlock();
 		return;
 	}
 
@@ -39,11 +51,11 @@ void SerialQueenGen::recursiveGenerate(Board board, int row)
 	}
 }
 
-bool SerialQueenGen::isValidPosition(Board board, int xPos, int yPos)
+bool ParallelQueenGenV1::isValidPosition(Board board, int xPos, int yPos)
 {
 	// Because boards are generated from top row down, we can assume that
 	// no queens will be placed in the same row. We also only have to
- 	// check diagonals beneath the current position.
+	// check diagonals beneath the current position.
 
 	// Checks if any other queens exist in the column
 	for (int x = 0; x < xPos; x++)

@@ -23,7 +23,7 @@ public:
 	*/
 	IQueenGen(int numberOfQueens = DEFAULT_NUM) : N(numberOfQueens) {}
 
-	~IQueenGen() { clearSolutionList(); }
+	virtual ~IQueenGen() { clearSolutionList(); }
 
 	/*
 	Should generate all distinct solutions for a board size and return number generated

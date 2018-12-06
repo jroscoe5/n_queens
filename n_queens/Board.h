@@ -5,6 +5,7 @@
 */
 
 #include <string>
+#include <iostream>
 using namespace std;
 
 #ifndef BOARD_H
@@ -30,7 +31,7 @@ public:
 		for (int x = 0; x < SIZE; x++)
 			for (int y = 0; y < SIZE; y++)
 				board[x][y] = false;
-	}
+	} 
 
 	/*
 	@param rhs - Board object whose square's state will be copied
@@ -62,6 +63,7 @@ public:
 		for (int x = 0; x < minSize; x++)
 			for (int y = 0; y < minSize; y++)
 				board[x][y] = rhs.board[x][y];
+		return *this;
 	}
 	
 	/*

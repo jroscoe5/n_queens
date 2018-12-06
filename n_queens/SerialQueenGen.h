@@ -3,9 +3,7 @@
 @author	- Jonathon Roscoe | Seattle University | CS4600 Fall 2018
 @summary- Serial Soluion generator to the N-Queens Problem
 */
-
 #include "IQueenGen.h"
-
 #ifndef SERIALQUEENGEN_H
 #define SERIALQUEENGEN_G
 class SerialQueenGen : public IQueenGen
