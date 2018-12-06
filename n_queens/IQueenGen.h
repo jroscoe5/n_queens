@@ -47,19 +47,23 @@ public:
 	/*
 	Prints all generated solutions
 	@param out - stream to print to
+	@param upToCount - optional param to print the first N solutions
 	*/
-	virtual void PrintSolutions(ostream& out)
+	virtual void PrintSolutions(ostream& out, unsigned int upToCount = UINT_MAX)
 	{
-		if (solutions.size() == 0)
+		if (upToCount <= 0 || solutions.size() == 0)
 		{
 			out << "No solutions availible at this time." << endl;
 			return;
 		}
 		else
-			for (int i = 0; i < solutions.size(); i++)
+		{
+			if (upToCount > solutions.size()) upToCount = solutions.size();
+			for (int i = 0; i < upToCount; i++)
 			{
 				solutions[i]->PrintBoard(out);
 			}
+		}
 	}
 
 protected:

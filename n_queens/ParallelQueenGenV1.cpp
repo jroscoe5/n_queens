@@ -1,9 +1,7 @@
 #include "ParallelQueenGenV1.h"
 
 ParallelQueenGenV1::ParallelQueenGenV1(int numberOfQueens = DEFAULT_NUM) :
-	IQueenGen(numberOfQueens)
-{
-}
+	IQueenGen(numberOfQueens) { }
 
 unsigned int ParallelQueenGenV1::GenerateSolutions()
 {
@@ -23,7 +21,7 @@ unsigned int ParallelQueenGenV1::GenerateSolutions()
 	}
 
 	delete[] handles;
-	return solutions.size();
+	return (unsigned int) solutions.size();
 }
 
 
@@ -37,7 +35,6 @@ void ParallelQueenGenV1::recursiveGenerate(Board board, int row)
 		solutionLock.unlock();
 		return;
 	}
-
 	// For each column in the row, if possible - 
 	// push a queen and recursively generate solutions for the new position.
 	for (int col = 0; col < N; col++)
