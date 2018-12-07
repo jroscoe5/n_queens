@@ -14,14 +14,11 @@ using namespace std;
 class IQueenGen
 {
 public:
-	/* Default Board size if none supplied */
-	static const int DEFAULT_NUM = 8;
-
 	/*
 	@param numberOfQueens - The desired number of queens, as well as the dimensions
 		of the board. Uses DEFAULT_NUM if nothing is provided
 	*/
-	IQueenGen(int numberOfQueens = DEFAULT_NUM) : N(numberOfQueens) {}
+	IQueenGen(int numberOfQueens) : N(numberOfQueens) {}
 
 	virtual ~IQueenGen() { clearSolutionList(); }
 

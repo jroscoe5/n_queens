@@ -3,12 +3,18 @@
 #include <future>
 #ifndef PARALLELQUEENGENV1_H
 #define PARALLELQUEENGENV1_H
-class ParallelQueenGenV1 :public IQueenGen
+class ParallelQueenGenV1 : public IQueenGen
 {
 public:
-
+	/*
+	@param numberOfQueens - The desired number of queens, as well as the dimensions
+	of the board. Uses IQueenGen's DEFAULT_NUM if none is provided
+	*/
 	ParallelQueenGenV1(int numberOfQueens);
 
+	/*
+	Generates all distinct solutions for a board size and return number generated
+	*/
 	unsigned int GenerateSolutions() override;
 
 private:
@@ -19,8 +25,14 @@ private:
 	*/
 	bool isValidPosition(Board board, int xPos, int yPos) override;
 
+	/*
+	Recursively generates and stores valid board states in solutions vector
+	@param board - board containing either initial or previous board state
+	@param row - current row queen will be inserted on
+	*/
 	void recursiveGenerate(Board board, int row);
 
+	/* Lock for solutions vector */
 	mutex solutionLock;
 };
 #endif

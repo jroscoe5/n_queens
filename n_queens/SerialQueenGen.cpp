@@ -6,7 +6,7 @@
 
 #include "SerialQueenGen.h"
 
-SerialQueenGen::SerialQueenGen(int numberOfQueens = DEFAULT_NUM) : 
+SerialQueenGen::SerialQueenGen(int numberOfQueens) : 
 	IQueenGen(numberOfQueens) {}
 
 unsigned int SerialQueenGen::GenerateSolutions()

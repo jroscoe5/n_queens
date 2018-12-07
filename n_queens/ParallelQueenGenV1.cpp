@@ -1,7 +1,15 @@
+/*
+@file	- ParallelQueenGenV1.cpp
+@author	- Jonathon Roscoe | Seattle University | CS4600 Fall 2018
+@summary- Function definitions of ParallelQueenGenV1.h
+*/
+
 #include "ParallelQueenGenV1.h"
 
-ParallelQueenGenV1::ParallelQueenGenV1(int numberOfQueens = DEFAULT_NUM) :
-	IQueenGen(numberOfQueens) { }
+ParallelQueenGenV1::ParallelQueenGenV1(int numberOfQueens) :
+	IQueenGen(numberOfQueens)
+{
+}
 
 unsigned int ParallelQueenGenV1::GenerateSolutions()
 {
@@ -21,7 +29,7 @@ unsigned int ParallelQueenGenV1::GenerateSolutions()
 	}
 
 	delete[] handles;
-	return (unsigned int) solutions.size();
+	return (unsigned int)solutions.size();
 }
 
 

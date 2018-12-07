@@ -117,12 +117,14 @@
   <ItemGroup>
     <ClCompile Include="Driver.cpp" />
     <ClCompile Include="ParallelQueenGenV1.cpp" />
+    <ClCompile Include="ParallelQueenGenV2.cpp" />
     <ClCompile Include="SerialQueenGen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="IQueenGen.h" />
     <ClInclude Include="ParallelQueenGenV1.h" />
+    <ClInclude Include="ParallelQueenGenV2.h" />
     <ClInclude Include="SerialQueenGen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
