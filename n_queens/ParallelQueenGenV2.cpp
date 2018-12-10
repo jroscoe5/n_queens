@@ -11,7 +11,7 @@ ParallelQueenGenV2::ParallelQueenGenV2(int numberOfQueens, int threads) :
 {
 	solutionList = nullptr;
 	// Not allowed to have more threads than there are columns
-	if (threads > N) threads = N;
+	if (threads > N) this->threads = N;
 }
 
 ParallelQueenGenV2::~ParallelQueenGenV2()
@@ -23,7 +23,7 @@ unsigned int ParallelQueenGenV2::GenerateSolutions()
 {
 	clearSolutionList();
 
-	future<ThreadPacket>* handles = new future<ThreadPacket>[threads];
+	std::future<ThreadPacket>* handles = new std::future<ThreadPacket>[threads];
 
 	// Calculate the initial queen positions each thread is responsible for
 	int colPerThread = N / threads;
@@ -33,12 +33,12 @@ unsigned int ParallelQueenGenV2::GenerateSolutions()
 	{
 		if (i != threads - 1)
 		{
-			handles[i] = async(launch::async, &ParallelQueenGenV2::threadGenerate, this, currCol, currCol + colPerThread);
+			handles[i] = std::async(std::launch::async, &ParallelQueenGenV2::threadGenerate, this, currCol, currCol + colPerThread);
 			currCol += colPerThread;
 		}
 		else
 		{
-			handles[i] = async(launch::async, &ParallelQueenGenV2::threadGenerate, this, currCol, N);
+			handles[i] = std::async(std::launch::async, &ParallelQueenGenV2::threadGenerate, this, currCol, N);
 		}
 	}
 
@@ -66,13 +66,13 @@ unsigned int ParallelQueenGenV2::GenerateSolutions()
 	return count;
 }
 
-void ParallelQueenGenV2::PrintSolutions(ostream& out, unsigned int upToCount)
+void ParallelQueenGenV2::PrintSolutions(std::ostream& out, unsigned int upToCount)
 {
 	Node* curr = solutionList;
 	unsigned int count = 0;
 	if (curr == nullptr)
 	{
-		out << "No solutions availible at this time." << endl;
+		out << "No solutions availible at this time." << std::endl;
 		return;
 	}
 	// Traverse through list and call each board's print function

@@ -38,6 +38,6 @@ private:
 	void recursiveGenerate(Board board, int row);
 
 	/* Lock for solutions vector */
-	mutex solutionLock;
+	std::mutex solutionLock;
 };
 #endif

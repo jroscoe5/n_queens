@@ -6,8 +6,8 @@
 
 #include <vector>
 #include <chrono>
+#include <limits>
 #include "Board.h"
-using namespace std;
 
 #ifndef IQUEENGEN_H
 #define IQUEENGEN_H
@@ -34,10 +34,10 @@ public:
 	*/
 	virtual unsigned int TimedGenerateSolutons(long long& milliseconds)
 	{
-		auto start = chrono::high_resolution_clock::now();
+		auto start = std::chrono::high_resolution_clock::now();
 		int count = GenerateSolutions();
-		auto end = chrono::high_resolution_clock::now();
-		milliseconds = chrono::duration_cast<chrono::milliseconds>(end - start).count();
+		auto end = std::chrono::high_resolution_clock::now();
+		milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 		return count;
 	}
 
@@ -46,11 +46,11 @@ public:
 	@param out - stream to print to
 	@param upToCount - optional param to print the first N solutions
 	*/
-	virtual void PrintSolutions(ostream& out, unsigned int upToCount = UINT_MAX)
+	virtual void PrintSolutions(std::ostream& out, unsigned int upToCount = std::numeric_limits<unsigned int>::max())
 	{
 		if (upToCount <= 0 || solutions.size() == 0)
 		{
-			out << "No solutions availible at this time." << endl;
+			out << "No solutions availible at this time." << std::endl;
 			return;
 		}
 		else
@@ -88,6 +88,6 @@ protected:
 	/* Board size */
 	const int N;
 	/* Holds generated solutions */
-	vector<Board*> solutions;
+	std::vector<Board*> solutions;
 };
 #endif

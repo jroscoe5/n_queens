@@ -6,8 +6,6 @@
 
 #include <string>
 #include <iostream>
-using namespace std;
-
 #ifndef BOARD_H
 #define BOARD_H
 /*	
@@ -91,27 +89,27 @@ public:
 	Writes a graphical representation of the board state to a stream
 	@param out - ostream object to write board to
 	*/
-	void PrintBoard(ostream& out)
+	void PrintBoard(std::ostream& out)
 	{
-		static const string QUEEN = "Q";
-		static const string EMPTY = "-";
+		static const std::string QUEEN = "Q";
+		static const std::string EMPTY = "-";
 
 		// Top of board: A dashed line
 		for (int i = 0; i < SIZE * 4 + 1; i++)
 			out << "-";
-		out << endl;
+		out << std::endl;
 		// Interior of board: Cells formatted as '| Q |'
 		for (int y = 0; y < SIZE; y++)
 		{
 			out << "|";
 			for (int x = 0; x < SIZE; x++)
 				board[x][y] ? out << " " << QUEEN << " |" : out << " " << EMPTY << " |";
-			out << endl;
+			out << std::endl;
 		}
 		// Bottom of board: A dashed line
 		for (int i = 0; i < SIZE * 4 + 1; i++)
 			out << "-";
-		out << endl;
+		out << std::endl;
 	}
 
 private:

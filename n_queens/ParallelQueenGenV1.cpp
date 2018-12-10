@@ -14,12 +14,12 @@ ParallelQueenGenV1::ParallelQueenGenV1(int numberOfQueens) :
 unsigned int ParallelQueenGenV1::GenerateSolutions()
 {
 	clearSolutionList();
-	future<void>* handles = new future<void>[N];
+	std::future<void>* handles = new std::future<void>[N];
 	Board board(N);
 	for (int col = 0; col < N; col++)
 	{
 		board(0, col, true);
-		handles[col] = async(launch::async, &ParallelQueenGenV1::recursiveGenerate, this, board, 1);
+		handles[col] = std::async(std::launch::async, &ParallelQueenGenV1::recursiveGenerate, this, board, 1);
 		board(0, col, false);
 	}
 

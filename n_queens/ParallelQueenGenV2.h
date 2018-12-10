@@ -10,6 +10,42 @@
 #include <future>
 #ifndef PARALLELQUEENGENV2_H
 #define PARALLELQUEENGENV2_H
+/*
+Holds a board with a valid solution and a pointer to the next solution
+in the list. Each thread computes its section of solutions and creates
+a linked list of Node objects to store them.
+*/
+struct Node
+{
+	Board board;
+	Node *next;
+	Node(Board clone) : board(clone)
+	{
+		next = nullptr;
+	}
+};
+
+/*
+Returned by a thread when it has generated its section of solutions
+Contains a count of solutions, as well as ptrs to the head and tail
+Nodes in its list of solutions for easy combination in the main thread.
+*/
+struct ThreadPacket
+{
+	Node *head, *tail;
+	int count;
+	ThreadPacket()
+	{
+		count = 0;
+		head = tail = nullptr;
+	}
+};
+
+/*
+Iteration of ParallelQueenGenV2 that allows specification of the desired number of threads.
+Stores solutions locally in each thread and combines them into one list when threads are 
+joined instead of sharing one list of solutions.
+*/
 class ParallelQueenGenV2 : public IQueenGen
 {
 public:
@@ -33,7 +69,7 @@ public:
 	@param out - stream to print to
 	@param upToCount - optional param to print the first N solutions
 	*/
-	void PrintSolutions(ostream& out, unsigned int upToCount = UINT_MAX) override;
+	void PrintSolutions(std::ostream& out, unsigned int upToCount = std::numeric_limits<unsigned int>::max()) override;
 
 private:
 	
@@ -74,37 +110,6 @@ private:
 	int threads;
 	/* Pointer to the list of all generated solutions */
 	Node* solutionList;
-};
-
-/*
-Holds a board with a valid solution and a pointer to the next solution
-in the list. Each thread computes its section of solutions and creates
-a linked list of Node objects to store them.
-*/
-struct Node
-{
-	Board board;
-	Node *next;
-	Node(Board clone) : board(clone)
-	{
-		next = nullptr;
-	}
-};
-
-/*
-Returned by a thread when it has generated its section of solutions
-Contains a count of solutions, as well as ptrs to the head and tail 
-Nodes in its list of solutions for easy combination in the main thread.
-*/
-struct ThreadPacket
-{
-	Node *head, *tail;
-	int count;
-	ThreadPacket()
-	{
-		count = 0;
-		head = tail = nullptr;
-	}
 };
 #endif
 
