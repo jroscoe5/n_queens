@@ -1,3 +1,8 @@
+/*
+@file	- ParallelQueenGenV1.h
+@author	- Jonathon Roscoe | Seattle University | CS4600 Fall 2018
+@summary- Parallel Solution Generator for the N-Queens Problem
+*/
 
 #include "IQueenGen.h"
 #include <future>
@@ -8,7 +13,7 @@ class ParallelQueenGenV1 : public IQueenGen
 public:
 	/*
 	@param numberOfQueens - The desired number of queens, as well as the dimensions
-	of the board. Uses IQueenGen's DEFAULT_NUM if none is provided
+	of the board.
 	*/
 	ParallelQueenGenV1(int numberOfQueens);
 

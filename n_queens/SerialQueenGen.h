@@ -3,6 +3,7 @@
 @author	- Jonathon Roscoe | Seattle University | CS4600 Fall 2018
 @summary- Serial Soluion generator to the N-Queens Problem
 */
+
 #include "IQueenGen.h"
 #ifndef SERIALQUEENGEN_H
 #define SERIALQUEENGEN_G
@@ -11,12 +12,12 @@ class SerialQueenGen : public IQueenGen
 public:
 	/*
 	@param numberOfQueens - The desired number of queens, as well as the dimensions
-		of the board. Uses IQueenGen's DEFAULT_NUM if none is provided
+		of the board.
 	*/
 	SerialQueenGen(int numberOfQueens);
 
 	/*
-	Generates all distinct solutions for a board size and return number generated
+	Generates all distinct solutions for a board size, returns number of solutions generated
 	*/
 	unsigned int GenerateSolutions() override;
 
